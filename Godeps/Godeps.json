@@ -1,0 +1,18 @@
+{
+	"ImportPath": "github.com/joshgoodson/voter-machine",
+	"GoVersion": "go1.5.1",
+	"Deps": [
+		{
+			"ImportPath": "github.com/garyburd/redigo/internal",
+			"Rev": "9c474d0715937065f7e5b9f8d724a72ba55763e7"
+		},
+		{
+			"ImportPath": "github.com/garyburd/redigo/redis",
+			"Rev": "9c474d0715937065f7e5b9f8d724a72ba55763e7"
+		},
+		{
+			"ImportPath": "github.com/streadway/amqp",
+			"Rev": "79beb307dcf5904fb8cb061276f1c14f222012c2"
+		}
+	]
+}
