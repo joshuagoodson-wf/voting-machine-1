@@ -2,10 +2,21 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
-	"github.com/garyburd/redigo/redis"
-	"github.com/streadway/amqp"
 	"log"
+
+	"github.com/garyburd/redigo/redis"
+	"github.com/rakyll/globalconf"
+	"github.com/streadway/amqp"
+)
+
+// Define flags
+var (
+	configPath               = flag.String("config", "config.yml", "Path to a configuration file")
+	redisConnectionString    = flag.String("redis", "redis://127.0.0.1:6379", "Redis connection string")
+	rabbitmqConnectionString = flag.String("rabbitmq", "amqp://guest:guest@localhost:5672/", "AMMQ connection string")
+	defaultQueue             = flag.String("queue", "votes", "Ephemeral AMQP queue name")
 )
 
 type Team struct {
@@ -20,13 +31,22 @@ func failOnError(err error, msg string) {
 }
 
 func main() {
+	// Configure options from environment variables
+	conf, err := globalconf.NewWithOptions(&globalconf.Options{
+		EnvPrefix: "VOTING_",
+	})
+	failOnError(err, "Failed to parse options")
+	conf.ParseAll()
+
 	// Establish RabbitMQ connection
-	rabbitConnection, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	log.Print("Connecting to AMQP...")
+	rabbitConnection, err := amqp.Dial(*rabbitmqConnectionString)
 	failOnError(err, "Failed to connect to RabbitMQ")
 	defer rabbitConnection.Close()
 
 	// Establish Redis connection
-	redisConnection, err := redis.Dial("tcp", ":6379")
+	log.Print("Connecting to Redis...")
+	redisConnection, err := redis.DialURL(*redisConnectionString)
 	failOnError(err, "Failed to connect to Redis")
 	defer redisConnection.Close()
 

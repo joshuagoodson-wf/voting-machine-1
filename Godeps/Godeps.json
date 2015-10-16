@@ -1,5 +1,5 @@
 {
-	"ImportPath": "github.com/joshgoodson/voter-machine",
+	"ImportPath": "github.com/joshgoodson/voting-machine",
 	"GoVersion": "go1.5.1",
 	"Deps": [
 		{
@@ -9,6 +9,14 @@
 		{
 			"ImportPath": "github.com/garyburd/redigo/redis",
 			"Rev": "9c474d0715937065f7e5b9f8d724a72ba55763e7"
+		},
+		{
+			"ImportPath": "github.com/rakyll/globalconf",
+			"Rev": "415abc325023f1a00cd2d9fa512e0e71745791a2"
+		},
+		{
+			"ImportPath": "github.com/rakyll/goini",
+			"Rev": "907cca0f578a5316fb864ec6992dc3d9730ec58c"
 		},
 		{
 			"ImportPath": "github.com/streadway/amqp",
