@@ -1,21 +1,9 @@
 worker:
   build: .
-  links:
-    - redis:redis
-    - rabbitmq:rabbitmq
   environment:
     - VOTING_RABBITMQ=amqp://voting-machine:secure@rabbitmq//
     - VOTING_REDIS=redis://redis
     - VOTING_QUEUE=votes
-rabbitmq:
-  image: rabbitmq:management
-  ports:
-    - 15672:15672
-    - 5672:5672
-  environment:
-    - RABBITMQ_DEFAULT_USER=voting-machine
-    - RABBITMQ_DEFAULT_PASS=secure
-redis:
-  image: redis
-  ports:
-    - 6379:6379
+  external_links:
+    - votingmachine_redis_1:redis
+    - votingmachine_rabbitmq_1:rabbitmq
