@@ -8,4 +8,4 @@ after_install:
   - cp /build/smithy/voting-machine /go/bin
   - chmod 755 /go/bin/voting-machine
 
-entrypoint: /go/bin/voting-machine
+cmd: /go/bin/voting-machine
