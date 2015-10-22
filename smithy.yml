@@ -1,0 +1,8 @@
+project: golang
+language: golang
+
+script:
+    - ./smithy/build.sh
+
+artifacts:
+    - ./voting-machine

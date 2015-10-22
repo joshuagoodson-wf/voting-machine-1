@@ -1,0 +1,11 @@
+---
+base: 'ubuntu/trusty'
+
+workdir: /go/src/github.com/joshgoodson/voting-machine
+
+after_install:
+  - mkdir -p /go/bin
+  - cp /build/smithy/voting-machine /go/bin
+  - chmod 755 /go/bin/voting-machine
+
+entrypoint: /go/bin/voting-machine
