@@ -1,11 +1,15 @@
 ---
 base: 'ubuntu/trusty'
 
-workdir: /go/src/github.com/joshgoodson/voting-machine
+workdir: /go/bin
+
+add:
+  run.sh: /go/bin/run.sh
 
 after_install:
   - mkdir -p /go/bin
   - cp /build/smithy/voting-machine /go/bin
   - chmod 755 /go/bin/voting-machine
+  - chmod 755 /go/bin/run.sh
 
-cmd: /go/bin/voting-machine
+cmd: ["/go/bin/run.sh"]
