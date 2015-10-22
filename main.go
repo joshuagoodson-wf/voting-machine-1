@@ -89,7 +89,7 @@ func main() {
 			failOnError(err, "Failed to unmarshal JSON body of message")
 
 			// Increment vote count for team
-			redisConnection.Do("INCR", fmt.Sprintf("team%s", team.Team))
+			redisConnection.Do("INCR", fmt.Sprintf("%s", team.Team))
 			log.Printf("Incremented vote count for team %s", team.Team)
 
 			msg.Ack(false)
